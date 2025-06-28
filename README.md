@@ -80,8 +80,8 @@ Key | Value
 | 2nd USB-C (Display output) | ✅ | `con2`, BusID `0x02` | It works properly (Hotplug is supported on cold boot) |
 
 > [!NOTE]
-> 1st USB-C and HDMI 1.4 shared its connector (using `con1`). I learned that if you plug your display into 1st USB-C, the HDMI port not working until the next reboot!
-> I think to make DisplayPort on both USB-C ports working, Thunderbolt must working too. As long as it not working, it will be driven by HDMI Protocol, even System Profiler says the output is `DisplayPort/Thunderbolt`
+> - 1st USB-C and HDMI 1.4 shared its connector (using `con1`). I learned that if you plug your display into 1st USB-C, the HDMI port not working until the next reboot!
+> - I think to make DisplayPort on both USB-C ports working, Thunderbolt must working too. As long as it not working, it will be driven by HDMI Protocol, even System Profiler says the output is `DisplayPort/Thunderbolt`
 
 ### Audio
 | Feature                              | Status | Dependency          | Remarks                      |
