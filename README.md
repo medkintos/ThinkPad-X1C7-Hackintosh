@@ -15,12 +15,52 @@ This repo is based from [HJebbour's ThinkPad-X1C8-Hackintosh](https://github.com
 **DISCLAIMER:**
 As you embark on your Hackintosh journey you are encouraged to **READ** the entire README and [Dortania](https://dortania.github.io/getting-started/) guides before you start.
 
-This X1C7 Hackintosh project aims to be an all-in-one maintained hub for OpenCore based hackintoshes on the Thinkad X1 Carbon Gen 7. In short, this X1C7-Hackintosh is very stable and is currently my daily driver. I fully recommend this project to anyone looking for a MacBook alternative.
+This X1C7 Hackintosh project aims to be an all-in-one maintained hub for OpenCore based hackintoshes on the Thinkad X1 Carbon Gen 7.
+
+This is my last hurrah on doing Hackintosh since 10.5 Leopard days, and the one that I always avoid: doing Hackintosh on laptops. The last Intel based MacBooks sucks, and my M3 Max MacBook Pro too heavy to carry. So i bought the X1 Carbon to create the perfect and light Intel based MacBook that I'll love to use
+
+This build suprisingly very stable with some minor caveats, and currently is my daily driver for some office work. I fully recommentd this project to anyone looking dor a MacBook alternative.
 
 You can find a wealth of knowledge on [Reddit](https://www.reddit.com/r/hackintosh/), [TonyMacX86](https://www.tonymacx86.com) or [Google](https://www.google.com).
-
-**Important:** If you are upgrading to macOS 14.4+ you have to set the value of `Misc -> Security -> SecureBootModel` to `Disabled` in config.plist and disable AirportItlwm kext untill the upgrade finishes and then use "AirportItlwm_v2.3.0_stable_Sonoma14.4.kext".
 
 Should you find an error, or improve anything, be it in the config itself or in the my documentation, please consider opening an issue or a pull request to contribute.
 
 **I am not responsible for any damages you may cause.**
+
+---
+
+WIP for ToC
+
+---
+
+## About
+OpenCore EFI folder and config for running macOS Sonoma and newer on the Lenovo ThinkPad X1 Carbon Gen 7. Read the following documentation carefully in order to install/boot macOS successfully!
+
+### Before you begin
+⚠️ The built-in Samsung PM981a NVMe that comes with the system is NOT compatible with macOS. You _must_ use a different NVMe!
+⚠️ If your X1 Carbon equipped with i7-10710U (like mine), don't forget to add these CPU Mask on `Kernel/Emulate`:
+Key | Value
+-------|------------
+`Cpuid1Data` | `EC060800 00000000 00000000 00000000`
+`Cpuid1Mask` | `FFFFFFFF 00000000 00000000 00000000`
+
+### Notable Features
+- [x] Compatible with macOS Sonoma and Sequoia (sorry, no support for macOS older than that)
+- [x] USB Port Mapping with support for USB-C Monitor HUB/Docking Station 
+- [x] Optimized Framebuffer Patch for smoother handshake with external displays via HDMI with 4K 30hz working
+- [x] Working clamshell mode (when connected to A/C and external display and USB-C Display)
+- [x] YogaSMC-free build based on 5T33Z0's DSDT T490 patches
+
+### Known Issues
+- [ ] Hibernation Mode 25 does not work properly
+- [ ] Fingerprint sensor does not work under macOS since there is currently no way to emulate Touch ID.
+- [ ] The internal mic isn't working because [AppleALC doesn't support Intel DMIC microphone setup](https://github.com/acidanthera/bugtracker/issues/2084)
+- [ ] HDMI hotplug works properly after being put to sleep and woken up once. Internal screen will garbled if hotplug initiated before sleep.
+
+> [!IMPORTANT]
+> 
+> - Before reporting any issues, ensure that your system uses the latest available UEFI and EC Firmware.
+> - Don't install macOS on an external disk or flash drive – use a compatible internal disk.
+
+### Future Developments
+- [ ] Optimizing framebuffer patch to make HDMI Hotplug to work on cold boot
