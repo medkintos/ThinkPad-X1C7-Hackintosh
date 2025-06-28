@@ -72,21 +72,23 @@ Key | Value
 # Feature Details
 
 ### Graphics
-| Feature                              | Status | Dependency          | Remarks                      |
+Fully working graphics acceleration with `WhateverGreen.kext` & `AAPL,ig-platform-id` = 00009B3E & `device-id` = 9B3E0000
+| Displays                             | Status | Connector, BusID, Port Type          | Remarks                      |
 | :----------------------------------- | ------ | ------------------- | ---------------------------- |
-| Full Graphics Accleration (QE/CI) | ✅ | `WhateverGreen.kext` & `AAPL,ig-platform-id` = 00009B3E & `device-id` = 9B3E0000 | - |
-| HDMI 1.4 | ✅ | `con1`, BusID `0x01` | It only works properly after being put to sleep and woken up once (Hotplug & 4K resolution are supported, with notes below) |
-| 1st USB-C (Display output) | ✅ | `con1`, BusID `0x01` | It only works properly after being put to sleep and woken up once (Hotplug & 4K resolution are supported, with notes below) |
-| 2nd USB-C (Display output) | ✅ | `con2`, BusID `0x02` | It works properly (Hotplug is supported on cold boot) |
+| Internal Display | ✴️ | `con0`, BusID `0x00`, type `LVDS` | Screen garbled/glitching if HDMI/1st USB-C plugged in on cold boot. If you encounter the glitch, TURN OFF YOUR LAPTOP IMMEDIATELY to avoid damaging your display! |
+| HDMI 1.4 | ✴️ | `con1`, BusID `0x01`, type `HDMI` | It only works properly after being put to sleep and woken up once (Hotplug & 4K resolution are supported, with notes below) |
+| 1st USB-C (Display output) | ✴️ | `con1`, BusID `0x01`, type `HDMI` | It only works properly after being put to sleep and woken up once (Hotplug & 4K resolution are supported, with notes below) |
+| 2nd USB-C (Display output) | ✅ | `con2`, BusID `0x02`, type `HDMI` | It works properly (Hotplug is supported on cold boot) |
 
 > [!NOTE]
 > - 1st USB-C and HDMI 1.4 shared its connector (using `con1`). I learned that if you plug your display into 1st USB-C, the HDMI port not working until the next reboot!
-> - I think to make DisplayPort on both USB-C ports working, Thunderbolt must working too. As long as it not working, it will be driven by HDMI Protocol, even System Profiler says the output is `DisplayPort/Thunderbolt`
+> - I think to make DisplayPort on both USB-C ports working, Thunderbolt must working too. As long as it not working, it will be driven by HDMI Protocol, even System Profiler says the output is `DisplayPort/Thunderbolt` and `framebuffer-conX-type` set to `DisplayPort`
 
 ### Audio
-| Feature                              | Status | Dependency          | Remarks                      |
-| :----------------------------------- | ------ | ------------------- | ---------------------------- |
-| Audio Output | ✅ | `AppleALC.kext` with Layout ID = 71 | - |
-| Audio Speakers | ✅ | `AppleALC.kext` with Layout ID = 71 | You have to manually aggregate the two output using "Audio MIDI Setup" to have 4 speakers working |
-| Audio Input | ✅ | `AppleALC.kext` with Layout ID = 71 | Headset microphone is inconsistent and needs more testing |
-| Automatic Headphone Output Switching | ✅ | `AppleALC.kext` with Layout ID = 71 | - |
+Works with `AppleALC.kext` and `LayoutID=71`
+| Feature                              | Status | Remarks                      |
+| :----------------------------------- | ------ | ---------------------------- |
+| Internal Speakers | ✅ | You have to manually aggregate the two output using "Audio MIDI Setup" to have 4 speakers working |
+| Internal Microphone | ❌ | Unsupported by AppleALC, see known issues. |
+| Headphone Jack Output | ✴️ |  Output sometimes inconsistent, fixed by replugging. Output switching works |
+| Headphone Jack Input | ✴️ | Input sometimes inconsistent, fixed by replugging. Input switching works |
