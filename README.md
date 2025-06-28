@@ -69,6 +69,38 @@ Key | Value
 
 ---
 
+# System Specs
+
+Category | Description
+:-------:|------------
+**Model** | Lenovo ThinkPad X1 Carbon Gen 7
+**Variant** | [**20R2**](https://psref.lenovo.com/syspool/Sys/PDF/ThinkPad/ThinkPad_X1_Carbon_7th_Gen/ThinkPad_X1_Carbon_7th_Gen_Spec.pdf)
+**CPU** | Intel [**Intel Core i7-10710U**](https://www.intel.com/content/www/us/en/products/sku/196448/intel-core-i710710u-processor-12m-cache-up-to-4-70-ghz/specifications.html) (Hexa Core)
+**RAM** | Soldered 16 GB DDR4 @2133 Mhz
+**Storage** | Teamgroup TM8FP6512G
+**Display** | Full HD (1080p) (Non-Touch with ThinkPad Privacy Guard )
+**iGPU** | Intel(R) Grpahics UHD 620
+**Audio** | [**Realtek ALC285**](https://github.com/dreamwhite/ChonkyAppleALC-Build/blob/master/Realtek/ALC285.md) (using Layout `71`)
+**Thunderbolt** | Alpine Ridge 4C 2016
+**Ethernet** | Intel I219-V
+**WiFi** | Intel AC-9560 <br> **Firmware**: [**`iwm-9000-46`**](https://www.intel.com/content/www/us/en/support/articles/000005511/wireless.html)
+**Bluetooth** | **Device**: Intel Wireless Bluetooth <br> **BT Version**: 5.1 <br> **VID**: `0x8087`, **PID**: `0x0aaa` <br> **Firmware**: `ibt-17-16-1.sfi`, `ibt17-16-1.ddc` <br>**USB Port**: `HS10`
+**Trackpad** | Synaptics <br>**Device-id**: `pci8086,9de8`. Controlled via I2C.
+**USB-C Display w/ Hub** | [**Dell UltraSharp U2723QE**](https://www.dell.com/en-us/shop/dell-ultrasharp-27-4k-usb-c-hub-monitor-u2723qe/apd/210-bdpf/monitors-monitor-accessories)
+
+---
+
+# BIOS Settings
+After powering on the machine, spam <kbd>F1</kbd> until you hear a beep to enter the BIOS. Change the following settings:
+
+Category | Setting
+:-------:|------------
+**Config** | **Display** <ul> <li>Shared Display Priority: `HDMI` <li> Total Graphics Memory: irrelevant for macOS </ul> **CPU** <ul> <li> Intel Hyperthreading Technology: `ON` 
+**Security** | **Fingerprint** <ul><li>Predesktop Authentication: `OFF` </ul> **Security Chip** <ul><li>Security Chip`ON` or `OFF` (enable for Windows 11) </ul> **Memory Protection** <ul> <li> Execution Prevention: `ON`</ul></ul> **Virtualization** <ul><li> Kernel DMA Protection: `ON` (enables `VT-D` by design)</ul> **I/O Port Access** <ul> <li> Ethernet LAN: `ON` <li> Wireless LAN: `ON` <li> Bluetooth: `ON` <li> USB Port: `ON` <li> Memory Card Slot: `ON` <li> Smart Card Slot: `OFF` <li> Integrated Camera: `ON` <li> Integrated Audio: `ON` <li> Microphone: `ON` <li> Fingerprint Reader: `ON` (works in Windows only) or `OFF` <li> Thunderbolt 3: `ON` </ul> **Absolute Persistance Module** <ul><li> Absolute Persistance Module Activation: `Disabled`</ul> **Secure Boot Configuration** <ul><li> Secure Boot: `OFF` </ul> **Intel SGX** <ul><li> Intel SGX Control: `Disabled`
+**Startup** | <ul> <li> **UEFI/ Legacy Boot**: `UEFI Only` <li> **Boot Mode**: `Quick` (Skips Diagnostics)
+
+---
+
 # Feature Details
 
 ### Graphics
