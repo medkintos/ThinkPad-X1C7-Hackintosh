@@ -10,7 +10,7 @@ OpenCore-based EFI for Lenovo ThinkPad X1 Carbon 7th Generation | Model 20R2
 [![OpenCore](https://img.shields.io/badge/OpenCore-1.0.4-blue.svg)](https://github.com/acidanthera/OpenCorePkg/releases/tag/1.0.4)
 [![Model](https://img.shields.io/badge/Model-20R2-red)](https://psref.lenovo.com/syspool/Sys/PDF/ThinkPad/ThinkPad_X1_Carbon_7th_Gen/ThinkPad_X1_Carbon_7th_Gen_Spec.pdf)
 
-This repo is based from [HJebbour's ThinkPad-X1C8-Hackintosh](https://github.com/HJebbour/ThinkPad-X1C8-Hackintosh/tree/main) and forked from several Comet Lake/Whiskey Lake based ThinkPad Hackintosh repositories (See **OTHER REPOSITORIES**)
+This repo is based from [HJebbour's ThinkPad-X1C8-Hackintosh](https://github.com/HJebbour/ThinkPad-X1C8-Hackintosh/tree/main), [5T33Z0's ThinkPad-T490-Hackintosh-OpenCore](https://github.com/5T33Z0/Thinkpad-T490-Hackintosh-OpenCore) and forked from several Kaby/Comet/Whiskey Lake based ThinkPad Hackintosh repositories (See **Credits and Thank Yous**)
 
 **DISCLAIMER:**
 As you embark on your Hackintosh journey you are encouraged to **READ** the entire README and [Dortania](https://dortania.github.io/getting-started/) guides before you start.
@@ -29,7 +29,35 @@ Should you find an error, or improve anything, be it in the config itself or in 
 
 ---
 
-WIP for ToC
+**TABLE of CONTENTS**
+
+- [About](#about)
+    - [Before you begin](#before-you-begin)
+    - [Notable Features](#notable-features)
+    - [Known Issues](#known-issues)
+    - [Future Developments](#future-developments)
+- [System Specs](#system-specs)
+- [BIOS Settings](#bios-settings)
+- [Feature Details](#feature-details)
+    - [Graphics](#graphics)
+    - [Audio](#audio)
+    - [Power Management](#power-management)
+    - [Connectivity](#connectivity)
+    - [Input/Output](#input-output)
+    - [macOS Features](#macos-features)
+    - [Miscellaneous](#miscellaneous)
+- [EFI Folder Content](#efi-folder-content)
+- [Preparations](#preparations)
+    - [Config Adjustments](#config-adjustments)
+- [Deployment](#deployment)
+    - [If macOS is installed already](#if-macos-is-installed-already)
+    - [If macOS is not installed](#if-macos-is-not-installed)
+- [Post-Install](#post-install)
+    - [Disable Gatekeeper (optional)](#disable-gatekeeper-optional)
+    - [Configure CPUFriend](#configure-cpufriend)
+    - [Configure Hibernation](#configure-hibernation)
+    - [Install DragScroll (optional).](#install-monitorcontrol-optional)
+- [Credits and Thank Yous](#credits-and-thank-yous)
 
 ---
 
@@ -344,6 +372,7 @@ Gatekeeper can be really annoying and wants to stop you from running python scri
 
 - **Special Thanks to**:
     - [5T33Z0](https://github.com/5T33Z0/) for his T490 config and ACPI hotfixes (and also this README.md template😁); and his OC-Little-Translated repo for the extensive guide.
+    
 - **These X1 Carbon OpenCore Repos** used for referencing and ACPI hotfixes:
     - [X1C6/tylernguyen](https://github.com/tylernguyen/x1c6-hackintosh)
     - [X1C7/aidanchandra](https://github.com/aidanchandra/x1c7-hackintosh)
