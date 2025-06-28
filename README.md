@@ -38,6 +38,7 @@ OpenCore EFI folder and config for running macOS Sonoma and newer on the Lenovo 
 
 ### Before you begin
 ⚠️ The built-in Samsung PM981a NVMe that comes with the system is NOT compatible with macOS. You _must_ use a different NVMe!
+
 ⚠️ If your X1 Carbon equipped with i7-10710U (like mine), don't forget to add these CPU Mask on `Kernel/Emulate`:
 Key | Value
 -------|------------
