@@ -33,7 +33,7 @@ WIP for ToC
 
 ---
 
-## About
+# About
 OpenCore EFI folder and config for running macOS Sonoma and newer on the Lenovo ThinkPad X1 Carbon Gen 7. Read the following documentation carefully in order to install/boot macOS successfully!
 
 ### Before you begin
@@ -65,3 +65,28 @@ Key | Value
 
 ### Future Developments
 - [ ] Optimizing framebuffer patch to make HDMI Hotplug to work on cold boot
+- [ ] Working Thunderbolt 3
+
+---
+
+# Feature Details
+
+### Graphics
+| Feature                              | Status | Dependency          | Remarks                      |
+| :----------------------------------- | ------ | ------------------- | ---------------------------- |
+| Full Graphics Accleration (QE/CI) | ✅ | `WhateverGreen.kext` & `AAPL,ig-platform-id` = 00009B3E & `device-id` = 9B3E0000 | - |
+| HDMI 1.4 | ✅ | `con1`, BusID `0x01` | It only works properly after being put to sleep and woken up once (Hotplug & 4K resolution are supported, with notes below) |
+| 1st USB-C (Display output) | ✅ | `con1`, BusID `0x01` | It only works properly after being put to sleep and woken up once (Hotplug & 4K resolution are supported, with notes below) |
+| 2nd USB-C (Display output) | ✅ | `con2`, BusID `0x02` | It works properly (Hotplug is supported on cold boot) |
+
+> [!NOTE]
+> 1st USB-C and HDMI 1.4 shared its connector (using `con1`). I learned that if you plug your display into 1st USB-C, the HDMI port not working until the next reboot!
+> I think to make DisplayPort on both USB-C ports working, Thunderbolt must working too. As long as it not working, it will be driven by HDMI Protocol, even System Profiler says the output is `DisplayPort/Thunderbolt`
+
+### Audio
+| Feature                              | Status | Dependency          | Remarks                      |
+| :----------------------------------- | ------ | ------------------- | ---------------------------- |
+| Audio Output | ✅ | `AppleALC.kext` with Layout ID = 71 | - |
+| Audio Speakers | ✅ | `AppleALC.kext` with Layout ID = 71 | You have to manually aggregate the two output using "Audio MIDI Setup" to have 4 speakers working |
+| Audio Input | ✅ | `AppleALC.kext` with Layout ID = 71 | Headset microphone is inconsistent and needs more testing |
+| Automatic Headphone Output Switching | ✅ | `AppleALC.kext` with Layout ID = 71 | - |
