@@ -43,7 +43,7 @@ Should you find an error, or improve anything, be it in the config itself or in 
     - [Audio](#audio)
     - [Power Management](#power-management)
     - [Connectivity](#connectivity)
-    - [Input/Output](#input-output)
+    - [Input/Output](#input/output)
     - [macOS Features](#macos-features)
     - [Miscellaneous](#miscellaneous)
 - [EFI Folder Content](#efi-folder-content)
@@ -56,7 +56,7 @@ Should you find an error, or improve anything, be it in the config itself or in 
     - [Disable Gatekeeper (optional)](#disable-gatekeeper-optional)
     - [Configure CPUFriend](#configure-cpufriend)
     - [Configure Hibernation](#configure-hibernation)
-    - [Install DragScroll (optional).](#install-monitorcontrol-optional)
+    - [Install DragScroll (optional).](#install-dragscroll-optional)
 - [Credits and Thank Yous](#credits-and-thank-yous)
 
 ---
