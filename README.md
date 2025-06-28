@@ -79,6 +79,7 @@ Fully working graphics acceleration with `WhateverGreen.kext` & `AAPL,ig-platfor
 | HDMI 1.4 | ✴️ | `con1`, BusID `0x01`, type `HDMI` | It only works properly after being put to sleep and woken up once (Hotplug & 4K resolution are supported, with notes below) |
 | 1st USB-C (Display output) | ✴️ | `con1`, BusID `0x01`, type `HDMI` | It only works properly after being put to sleep and woken up once (Hotplug & 4K resolution are supported, with notes below) |
 | 2nd USB-C (Display output) | ✅ | `con2`, BusID `0x02`, type `HDMI` | It works properly (Hotplug is supported on cold boot) |
+| DRM | ❌ | iGPU | DRM is broken with iGPUs |
 
 > [!NOTE]
 > - 1st USB-C and HDMI 1.4 shared its connector (using `con1`). I learned that if you plug your display into 1st USB-C, the HDMI port not working until the next reboot!
@@ -92,3 +93,59 @@ Works with `AppleALC.kext` and `LayoutID=71`
 | Internal Microphone | ❌ | Unsupported by AppleALC, see known issues. |
 | Headphone Jack Output | ✴️ |  Output sometimes inconsistent, fixed by replugging. Output switching works |
 | Headphone Jack Input | ✴️ | Input sometimes inconsistent, fixed by replugging. Input switching works |
+
+### Power Management
+| Feature                              | Status | Dependency          | Remarks                      |
+| :----------------------------------- | ------ | ------------------- | ---------------------------- |
+| Battery | ✅ | `ECEnabler.kext` | - |
+| CPU Power Management (SpeedShift) | ✅ | `CPUFriend.kext` with `CPUFriendDataProvider.kext` Don't forget to create yours yourself | - |
+| iGPU Power Management | ✅ | `WhateverGreen.kext` | Apple GuC Firmware enabled by `igfxfw=0x02` |
+| NVMe Drive Battery Management | ✅ | `NVMeFix.kext` | Improves NVMe drive power management |
+| S3 Sleep / Hibernation Mode 3 | ✅ | - | - |
+
+### Connectivity
+| Feature                              | Status | Dependency          | Remarks                      |
+| :----------------------------------- | ------ | ------------------- | ---------------------------- |
+| WiFi | ✅ | `AirportIltwm.kext` | - |
+| Bluetooth | ✅ | `IntelBluetoothFirmware.kext`, `BlueToolFixup.kext`, and `USBMap.kext` | BTLE devices won't pair and headset's microphone is not working via Bluetooth |
+| Ethernet | ✅ | `IntelMausi.kext` | - |
+| Wireless WAN | ❌ | `DISABLED` in BIOS to save power. | Unable to investigate as I have no need and my model did not come with WWAN |
+| USB 2.0 / USB 3.0 | ✅ | `USBMap.kext` | Create your own USBMap.kext using [CorpNewt](https://github.com/corpnewt/USBMap) |
+| USB 3.1 (Type-C) | ✅ | `USBMap.kext` and enable Thunderbolt 3 in `BIOS` | Hotplug is working |
+| Thunderbolt 3 | ✴️ | - | Ongoing research as there's a way to enable Thunderbolt in Alpine Ridge platform |
+
+### Input/Output
+| Feature                              | Status | Dependency          | Remarks                      |
+| :----------------------------------- | ------ | ------------------- | ---------------------------- |
+| Built-in Keyboard | ✅ | `VoodooPS2Controller.kext` | - |
+| Brightness Adjustments | ✅ | `BrightnessKeys.kext`| - |
+| Hotkeys | ✅ | 5T33Z0's `SSDT-T490-KBD.aml`| - |
+| Trackpoint | ✅ | `VoodooPS2Controller.kext` | - |
+| Trackpad | ✅ | `VoodooI2C.kext` and `VoodooI2CHID.kext` | - |
+| Fingerprint Reader | ❌ | - | Will never work |
+| Webcam | ✅ | `USBMap.kext` | - |
+
+### macOS Features
+| Feature                              | Status | Dependency          | Remarks                      |
+| :----------------------------------- | ------ | ------------------- | ---------------------------- |
+| iCloud, iMessage, FaceTime | ✅ | Whitelisted Apple ID, Valid SMBIOS See [Dortania / OpenCore-Install-Guide](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html) | Works as long as Ethernet detected as `en0` |
+| Wired Sidecar | ✅ | - | Tested with iPad Pro (2018) with USB-C to USB-C cable |
+| Handoff | ✅ | - | Works everytime I use Handoff supported apps  |
+| Instant Hotspot | ❌ | - | Detects but won't connect |
+| Continuity Camera | ❌ | - | Not working with Intel wireless cards |
+| AirDrop | ❌ | - | Not working with Intel wireless cards |
+| Apple Watch Auto Unlock | ❌ | - | Not working with Intel wireless cards |
+| Wireless Sidecar | ❌ | - | Not working with Intel wireless cards |
+| Continuity Markup and Sketch | ❌ | - | Not working with Intel wireless cards |
+| Universal Clipboard | ❌ | - | Support dropped with macOS Sonoma and the new AirportIltwm kext |
+| SMS & Phone Call via iPhone | ❌ | - | Support dropped with macOS Sonoma and the new AirportIltwm kext |
+| AirPlay to Mac | ❌ | - | Support dropped with macOS Sonoma and the new AirportIltwm kext |
+| FireVault 2 | ❓ | - | Untested because I don't like macOS encrypting my drive |
+
+### Miscellaneous
+| Feature                              | Status | Dependency          | Remarks                      |
+| :----------------------------------- | ------ | ------------------- | ---------------------------- |
+| Multiple Boot | ✅ | - | macOS & Windows. As I don't like OpenCore to inject DSDT's to Windows, I use rEFInd to pick the Windows Boot Manager/OpenCore |
+| YogaSMC | ❌ | `YogaSMC.kext` | I disabled YogaSMC because of some performance issues after multiple sleep and wakes. Also, the DYTC function not working on Sonoma+. Hotkeys function superseeded by `SSDT-T490-KBD.aml` although I lose functionality to enable the Privacy Screen Guard |
+| OpenCore Boot chime | ✅ | - | Working like a charm! |
+
